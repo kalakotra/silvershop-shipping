@@ -6,7 +6,6 @@ use SilverShop\Shipping\Model\TableShippingMethod;
 use SilverStripe\Core\Manifest\ModuleResourceLoader;
 use SilverStripe\Dev\BuildTask;
 use SilverStripe\Dev\FixtureFactory;
-use SilverStripe\ORM\DataObject;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Dev\YamlFixture;
 use SilverStripe\ORM\DB;
@@ -22,7 +21,7 @@ class PopulateTableShippingTask extends BuildTask
 
     public function run($request = null): void
     {
-        if (!DataObject::get_one(TableShippingMethod::class)) {
+        if (!TableShippingMethod::get()->first()) {
             $factory = Injector::inst()->create(FixtureFactory::class);
             $fixture = YamlFixture::create(
                 ModuleResourceLoader::singleton()
