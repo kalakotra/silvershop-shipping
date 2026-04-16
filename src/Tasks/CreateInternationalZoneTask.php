@@ -14,7 +14,7 @@ class CreateInternationalZoneTask extends BuildTask
 {
     protected string $title = 'Create International Zone';
 
-    protected string $description = 'Quickly creates an international zone, based on all available countries.';
+    protected static string $description = 'Quickly creates an international zone, based on all available countries.';
 
     protected function execute(InputInterface $input, PolyOutput $output): int
     {

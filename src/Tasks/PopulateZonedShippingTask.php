@@ -19,7 +19,7 @@ class PopulateZonedShippingTask extends BuildTask
 {
     protected string $title = "Populate Zoned Shipping Methods";
 
-    protected string $description = 'If no zoned shipping methods exist, it creates some.';
+    protected static string $description = 'If no zoned shipping methods exist, it creates some.';
 
     public function populateIfMissing(): bool
     {
