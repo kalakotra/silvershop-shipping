@@ -6,6 +6,9 @@ use SilverShop\Extension\ShopConfigExtension;
 use SilverShop\Shipping\Model\Zone;
 use SilverShop\Shipping\Model\ZoneRegion;
 use SilverStripe\Dev\BuildTask;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use SilverStripe\PolyExecution\PolyOutput;
 
 class CreateInternationalZoneTask extends BuildTask
 {
@@ -32,4 +35,25 @@ class CreateInternationalZoneTask extends BuildTask
             echo '.';
         }
     }
+
+    protected function execute(InputInterface $input, PolyOutput $output): int
+    {
+        $zone = Zone::create();
+        $zone->Name = 'International';
+        $zone->Description = 'All countries';
+        $zone->write();
+
+        $countries = ShopConfigExtension::current()->getCountriesList();
+
+        foreach ($countries as $code => $country) {
+            ZoneRegion::create()->update(
+                [
+                    'ZoneID' => $zone->ID,
+                    'Country' => $code,
+                ]
+            )->write();
+            $output->write('.');
+        }
+        $output->writeln('');
+        return Command::SUCCESS;
 }
