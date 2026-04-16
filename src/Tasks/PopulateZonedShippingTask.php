@@ -7,6 +7,8 @@ use SilverStripe\ORM\DataObject;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Dev\YamlFixture;
 use SilverStripe\ORM\DB;
+use SilverShop\Shipping\Model\ZonedShippingMethod;
+use SilverStripe\Dev\FixtureFactory;
 
 /**
  * @package silvershop-shipping
@@ -19,8 +21,8 @@ class PopulateZonedShippingTask extends BuildTask
 
     public function run($request = null): void
     {
-        if (!DataObject::get_one('ZonedShippingMethod')) {
-            $factory = Injector::inst()->create('FixtureFactory');
+        if (!ZonedShippingMethod::get()->first()) {
+            $factory = Injector::inst()->create(FixtureFactory::class);
             $fixture = YamlFixture::create('silvershop/shipping:tests/ZonedShippingMethod.yml');
             $fixture->writeInto($factory);
             DB::alteration_message('Created zoned shipping methods', 'created');

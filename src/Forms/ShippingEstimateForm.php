@@ -12,8 +12,6 @@ use SilverStripe\Forms\RequiredFields;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverShop\Cart\ShoppingCart;
 use SilverShop\Shipping\ShippingEstimator;
-use SilverStripe\Core\Convert;
-use SilverStripe\Control\Director;
 
 class ShippingEstimateForm extends Form
 {
@@ -47,7 +45,7 @@ class ShippingEstimateForm extends Form
         if ($order = ShoppingCart::singleton()->current()) {
             $estimator = ShippingEstimator::create(
                 $order,
-                Address::create(Convert::raw2sql($data))
+                Address::create($data)
             );
 
             $estimates = $estimator->getEstimates();
@@ -70,7 +68,7 @@ class ShippingEstimateForm extends Form
                 $estimates
             );
 
-            if (Director::is_ajax()) {
+            if ($this->getRequest()->isAjax()) {
                 //TODO: replace with an AJAXResponse class that can output to different formats
                 return json_encode($estimates->toNestedArray());
             }
