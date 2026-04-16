@@ -16,26 +16,6 @@ class CreateInternationalZoneTask extends BuildTask
 
     protected $description = 'Quickly creates an international zone, based on all available countries.';
 
-    public function run($request): void
-    {
-        $zone = Zone::create();
-        $zone->Name = 'International';
-        $zone->Description = 'All countries';
-        $zone->write();
-
-        $countries = ShopConfigExtension::current()->getCountriesList();
-
-        foreach ($countries as $code => $country) {
-            ZoneRegion::create()->update(
-                [
-                    'ZoneID' => $zone->ID,
-                    'Country' => $code,
-                ]
-            )->write();
-            echo '.';
-        }
-    }
-
     protected function execute(InputInterface $input, PolyOutput $output): int
     {
         $zone = Zone::create();
@@ -55,5 +35,7 @@ class CreateInternationalZoneTask extends BuildTask
             $output->write('.');
         }
         $output->writeln('');
+
         return Command::SUCCESS;
+    }
 }
