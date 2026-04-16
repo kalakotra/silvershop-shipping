@@ -12,9 +12,9 @@ use SilverStripe\PolyExecution\PolyOutput;
 
 class CreateInternationalZoneTask extends BuildTask
 {
-    protected $title = 'Create International Zone';
+    protected string $title = 'Create International Zone';
 
-    protected $description = 'Quickly creates an international zone, based on all available countries.';
+    protected string $description = 'Quickly creates an international zone, based on all available countries.';
 
     protected function execute(InputInterface $input, PolyOutput $output): int
     {

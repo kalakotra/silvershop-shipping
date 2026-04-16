@@ -17,9 +17,9 @@ use SilverStripe\PolyExecution\PolyOutput;
  */
 class PopulateZonedShippingTask extends BuildTask
 {
-    protected $title = "Populate Zoned Shipping Methods";
+    protected string $title = "Populate Zoned Shipping Methods";
 
-    protected $description = 'If no zoned shipping methods exist, it creates some.';
+    protected string $description = 'If no zoned shipping methods exist, it creates some.';
 
     public function populateIfMissing(): bool
     {

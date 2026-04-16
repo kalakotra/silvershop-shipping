@@ -17,9 +17,9 @@ use SilverStripe\PolyExecution\PolyOutput;
  */
 class PopulateTableShippingTask extends BuildTask
 {
-    protected $title = "Populate Table Shipping Methods";
+    protected string $title = "Populate Table Shipping Methods";
 
-    protected $description = 'If no table shipping methods exist, it creates multiple different setups of table shipping.';
+    protected string $description = 'If no table shipping methods exist, it creates multiple different setups of table shipping.';
 
     public function populateIfMissing(): bool
     {
