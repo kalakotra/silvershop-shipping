@@ -6,7 +6,7 @@ use SilverStripe\Core\Injector\Injectable;
 use SilverShop\Shipping\Model\ShippingMethod;
 use SilverShop\Model\Order;
 use SilverShop\Model\Address;
-use SilverStripe\ORM\ArrayList;
+use SilverStripe\Model\List\ArrayList;
 
 /**
  * Helper class for calculating rates for available shipping options.
